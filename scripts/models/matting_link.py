@@ -2,6 +2,7 @@ import functools
 import operator
 import numpy as np
 from scipy import sparse
+import scipy.sparse.linalg as la
 
 import chainer
 from chainer import cuda
@@ -22,13 +23,13 @@ def _solve(A, b):
 
     def _solve_drt(A, b):
         # Direct solver with umfpack. (float64 is required)
-        solution = sparse.linalg.spsolve(A.astype(np.float64),
+        solution = la.spsolve(A.astype(np.float64),
                                          b.astype(np.float64))
         return solution
 
     def _solve_itr(A, b):
         # Iterative solver (TODO: Tune maxiter)
-        solution = sparse.linalg.bicg(A, b, maxiter=len(b))
+        solution = la.bicg(A, b, maxiter=len(b))
         return solution[0]
 
     # Use iterative solver

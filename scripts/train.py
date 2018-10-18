@@ -34,7 +34,7 @@ def parse_arguments(argv):
                         help='Number of images in each mini-batch')
     parser.add_argument('--max_iteration', '-e', type=int, default=30000,
                         help='Number of sweeps over the dataset to train')
-    parser.add_argument('--gpus', '-g', type=int, default=[-1], nargs='*',
+    parser.add_argument('--gpus', '-g', type=int, default=[0], nargs='*',
                         help='GPU IDs (negative value indicates CPU)')
     parser.add_argument('--lr', type=float, default=1e-4,
                         help='Initial learning rate')
